@@ -241,3 +241,9 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+
+#idea
+.idea/
+
+#custom
+clients/**/dist/
