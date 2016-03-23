@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
 
-export default class ListPage extends Component {
+class ListPage extends Component {
   static propTypes = {
     actions: PropTypes.shape({
       loadItems: PropTypes.func.isRequired
