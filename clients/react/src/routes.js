@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
 import App from './components/App';
-import ItemsListPage from './containers/ItemsListPage';
+import ItemsListPage from './components/Items/ListPage';
 import AboutPage from './components/AboutPage.js';
 import NotFoundPage from './components/NotFoundPage.js';
 

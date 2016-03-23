@@ -1,6 +1,7 @@
 // For info about this file refer to webpack and webpack-hot-middleware documentation
 // Rather than having hard coded webpack.config.js for each environment, this
 // file generates a webpack config for the environment passed to the getConfig method.
+import 'babel-polyfill'
 import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -9,10 +10,11 @@ const developmentEnvironment = 'development' ;
 const productionEnvironment = 'production';
 const testEnvironment = 'test';
 
-const getPlugins = function (env) {
+const getPlugins = function(env) {
   const GLOBALS = {
     'process.env.NODE_ENV': JSON.stringify(env),
-    __DEV__: env === developmentEnvironment
+    __DEV__: env === developmentEnvironment,
+    __APIUrl__: JSON.stringify(env === developmentEnvironment ? 'http://localhost:53176/api' : '/api')
   };
 
   const plugins = [
@@ -36,7 +38,7 @@ const getPlugins = function (env) {
   return plugins;
 };
 
-const getEntry = function (env) {
+const getEntry = function(env) {
   const entry = [];
 
   if (env === developmentEnvironment ) { // only want hot reloading when in dev.
@@ -50,7 +52,7 @@ const getEntry = function (env) {
   return entry;
 };
 
-const getLoaders = function (env) {
+const getLoaders = function(env) {
   const loaders = [{ test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] }];
 
   if (env === productionEnvironment ) {

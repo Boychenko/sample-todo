@@ -13,7 +13,8 @@ import cheerio from 'cheerio';
 
 fs.readFile('src/index.html', 'utf8', (err, markup) => {
   if (err) {
-    return console.log(err);
+    console.log(err);
+    return;
   }
 
   const $ = cheerio.load(markup);
@@ -24,9 +25,9 @@ fs.readFile('src/index.html', 'utf8', (err, markup) => {
   fs.writeFile('dist/index.html', $.html(), 'utf8', (err) => {
     if (err) {
       console.log(err);
+      return;
     }
+    console.log('index.html written to /dist'.green);
   });
-
-  return console.log('index.html written to /dist'.green);
 });
 

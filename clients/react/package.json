@@ -9,6 +9,7 @@
     "open:dist": "babel-node tools/distServer.js",
     "lint:tools": "eslint webpack.config.js tools",
     "lint": "eslint src tools || echo Look at eslint errors above",
+    "lint:fix": "eslint src tools --fix",
     "lint:watch": "watch \"npm run lint\" src tools",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
@@ -21,6 +22,7 @@
   "author": "Alexander Boychenko",
   "license": "MIT",
   "dependencies": {
+    "babel-polyfill": "6.7.2",
     "bootstrap-sass": "3.3.6",
     "jquery": "2.2.1",
     "object-assign": "4.0.1",
@@ -31,7 +33,9 @@
     "react-router": "2.0.0",
     "react-router-bootstrap": "0.20.1",
     "redux": "3.3.1",
-    "redux-thunk": "1.0.3"
+    "redux-logger": "2.6.1",
+    "redux-thunk": "1.0.3",
+    "superagent": "1.8.1"
   },
   "devDependencies": {
     "babel-cli": "6.5.1",
