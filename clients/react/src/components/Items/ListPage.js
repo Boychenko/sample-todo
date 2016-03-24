@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import ItemsList from './List';
+import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
@@ -19,6 +20,7 @@ class ListPage extends Component {
   render() {
     return (
       <div>
+        <Helmet title="Todo Items"/>
         <h2>Items</h2>
         <ItemsList items={this.props.items}/>
       </div>
