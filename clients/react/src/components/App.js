@@ -21,12 +21,14 @@ export default class App extends Component {
             <IndexLinkContainer to="/">
               <NavItem eventKey={1}>Home</NavItem>
             </IndexLinkContainer>
-            <LinkContainer to="/About">
+            <LinkContainer to="/Items">
               <NavItem eventKey={2}>Items</NavItem>
             </LinkContainer>
           </Nav>
         </Navbar>
-        {this.props.children}
+        <div className="container">
+          {this.props.children}
+        </div>
       </div>
     );
   }

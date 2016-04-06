@@ -58,12 +58,17 @@ const getLoaders = function(env) {
   if (env === productionEnvironment ) {
     // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
     loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")});
+    loaders.push({test: /\.less$/, loader: ExtractTextPlugin.extract("css?sourceMap!less?sourceMap")});
   } else {
     loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']});
+    loaders.push({test: /\.less$/, loaders: ['style', 'css?sourceMap', 'less?sourceMap']});
   }
 
-  loaders.push({test: /\.(woff2?|svg)$/, loader: 'url?limit=10000'});
-  loaders.push({test: /\.(ttf|eot)$/, loader: 'file'});
+  loaders.push({test: /\.(woff2?)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'});
+  loaders.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" });
+  loaders.push({test: /\.(eot)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'});
+  loaders.push({test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"});
+  loaders.push({test: /\.(jpe?g|png|gif|svg)$/i, loader: 'url?limit=10000!img?progressive=true'});
   loaders.push({test: /bootstrap-sass(\\|\/)assets(\\|\/)javascripts(\\|\/)/, loader: 'imports?jQuery=jquery'});
 
   return loaders;
