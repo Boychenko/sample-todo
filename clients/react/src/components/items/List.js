@@ -1,12 +1,18 @@
 import React, {PropTypes} from 'react';
+import ItemListRow from './ItemListRow';
+import ItemListHeader from './ItemListHeader';
+import priorities from '../../constants/Priorities';
 
 const List = (props) => {
-  const items = props.items.map(item => <li key={item.id}>{item.title}</li>);
   return (
-      <div>
-        <p>Items list goes here</p>
-        <ul>{items}</ul>
-      </div>
+    <table className="table table-striped table-hover">
+      <ItemListHeader/>
+      <tbody>
+      {props.items.map(item =>
+        <ItemListRow key={item.id} item={item} priorities={priorities}/>
+      )}
+      </tbody>
+    </table>
   );
 };
 

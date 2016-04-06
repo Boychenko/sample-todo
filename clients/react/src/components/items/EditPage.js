@@ -3,6 +3,7 @@ import EditForm from './EditForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
+import priorities from '../../constants/Priorities';
 
 class EditPage extends Component {
   save = (data) => {
@@ -12,7 +13,7 @@ class EditPage extends Component {
 
   render() {
     return (
-      <EditForm save={this.save}/>
+      <EditForm save={this.save} priorities={priorities}/>
     );
   }
 }

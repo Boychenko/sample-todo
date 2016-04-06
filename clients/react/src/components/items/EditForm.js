@@ -15,13 +15,13 @@ class EditForm extends Component {
 
   render() {
     const {fields: {title, dueDate, priority, completed, description},
+      priorities,
       submitting,
       handleSubmit,
       save,
       resetForm
       } = this.props;
 
-    const priorities = {0: 'Low', 1: 'Medium', 2: 'High', 3: 'Urgent'};
     const options = Object.keys(priorities).map(key => <option key={key} value={key}>{priorities[key]}</option>);
     return (
       <form onSubmit={handleSubmit(save)}>
@@ -70,6 +70,7 @@ class EditForm extends Component {
 }
 
 EditForm.propTypes = {
+  priorities    : PropTypes.object.isRequired,
   fields        : PropTypes.object.isRequired,
   handleSubmit  : PropTypes.func.isRequired,
   initializeForm: PropTypes.func.isRequired,
