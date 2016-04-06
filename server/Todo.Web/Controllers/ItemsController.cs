@@ -1,6 +1,9 @@
 ﻿namespace Todo.Web.Controllers
 {
+    using System;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
     using AutoMapper;
@@ -10,7 +13,6 @@
     using Models;
     using Models.Dtos;
 
-    [Authorize]
     [RoutePrefix("api/items")]
     public class ItemsController : BaseController
     {
@@ -41,7 +43,7 @@
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = "GetItemById")]
         public async Task<IHttpActionResult> Get(long id)
         {
             var item = await _itemService.Get(User.Identity.GetAppUserId(), id);
@@ -56,9 +58,14 @@
             {
                 return BadRequest(ModelState);
             }
+
             var item = _mapper.Map(itemDto, new Item());
             item = await _itemService.Create(User.Identity.GetAppUserId(), item);
-            return Created(Url.Link("DefaultApi", new { controller = "Items", item.Id }), _mapper.Map<Item, ItemDto>(item));
+            var response = Request.CreateResponse(HttpStatusCode.Created, _mapper.Map<Item, ItemDto>(item));
+
+            string uri = Url.Link("GetItemById", new { item.Id });
+            response.Headers.Location = new Uri(uri);
+            return ResponseMessage(response);
         }
 
         [HttpPut]

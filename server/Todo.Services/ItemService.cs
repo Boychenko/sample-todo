@@ -41,7 +41,7 @@
         public async Task<Item> Create(string userId, Item item)
         {
             item.UserId = userId;
-            item.DueDate = item.DueDate.Date;
+            item.DueDate = item.DueDate;
             _uow.ItemRepository.Add(item);
             await _uow.Commit();
             return item;
