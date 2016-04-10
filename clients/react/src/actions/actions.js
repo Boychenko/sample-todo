@@ -1,9 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
-export function loadItems() {
+export function loadItems(page) {
   return {
     types: [types.ITEMS_REQUEST, types.ITEMS_SUCCESS, types.ITEMS_FAILURE],
-    promise: (client) => client.get('/items')
+    promise: (client) => client.get('/items', {params})
   };
 }
 

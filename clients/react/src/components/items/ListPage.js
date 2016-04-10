@@ -5,13 +5,23 @@ import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
+import ReactPaginate from 'react-paginate';
 
 class ListPage extends Component {
   componentDidMount() {
     this.props.actions.loadItems();
   }
 
+  handlePageClick = (page) => {
+    this.props.actions.loadItems({page: page.selected + 1});
+  };
+
   render() {
+    const {pagingInfo: {page, pageCount}, isFetching} = this.props.items;
+    let containerClassName = 'pagination';
+    if (isFetching) {
+      containerClassName += ' disabled';
+    }
     return (
       <div>
         <Helmet title="Todo Items"/>
@@ -21,7 +31,19 @@ class ListPage extends Component {
             <span className="glyphicon glyphicon-plus"/> Create Item
           </Link>
         </div>
-        <ItemsList items={this.props.items}/>
+        <ItemsList items={this.props.items && this.props.items.list}/>
+        <ReactPaginate className="disabled"
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={<a href="">...</a>}
+          pageNum={pageCount}
+          forceSelected={page}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          clickCallback={this.handlePageClick}
+          containerClassName={containerClassName}
+          activeClassName={"active"}
+        />
       </div>
     );
   }
@@ -31,7 +53,11 @@ ListPage.propTypes = {
   actions: PropTypes.shape({
     loadItems: PropTypes.func.isRequired
   }),
-  items: PropTypes.array.isRequired
+  items  : PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
+    list      : PropTypes.array.isRequired,
+    pagingInfo: PropTypes.object.isRequired
+  })
 };
 
 function mapStateToProps(state) {
