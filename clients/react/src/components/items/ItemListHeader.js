@@ -9,6 +9,7 @@ const ItemListHeader = () => {
         <th>Description</th>
         <th>Priority</th>
         <th>Due Date</th>
+        <th>&nbsp;</th>
       </tr>
     </thead>
   );

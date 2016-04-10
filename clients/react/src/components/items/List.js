@@ -9,7 +9,7 @@ const List = (props) => {
       <ItemListHeader/>
       <tbody>
       {props.items.map(item =>
-        <ItemListRow key={item.id} item={item} priorities={priorities}/>
+        <ItemListRow key={item.id} item={item} priorities={priorities} deleteItem={props.deleteItem}/>
       )}
       </tbody>
     </table>
@@ -17,7 +17,8 @@ const List = (props) => {
 };
 
 List.propTypes = {
-  items: PropTypes.array.isRequired
+  items     : PropTypes.array.isRequired,
+  deleteItem: PropTypes.func.isRequired
 };
 
 export default List;

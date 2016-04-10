@@ -16,6 +16,11 @@ class ListPage extends Component {
     this.props.actions.loadItems({page: page.selected + 1});
   };
 
+  deleteItem = (event, item) => {
+    event.preventDefault();
+    this.props.actions.deleteItem(item);
+  };
+
   render() {
     const {pagingInfo: {page, pageCount}, isFetching} = this.props.items;
     let containerClassName = 'pagination';
@@ -31,8 +36,8 @@ class ListPage extends Component {
             <span className="glyphicon glyphicon-plus"/> Create Item
           </Link>
         </div>
-        <ItemsList items={this.props.items && this.props.items.list}/>
-        <ReactPaginate className="disabled"
+        <ItemsList items={this.props.items.list} deleteItem={this.deleteItem}/>
+        <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
           breakLabel={<a href="">...</a>}
@@ -51,7 +56,8 @@ class ListPage extends Component {
 
 ListPage.propTypes = {
   actions: PropTypes.shape({
-    loadItems: PropTypes.func.isRequired
+    loadItems : PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired
   }),
   items  : PropTypes.shape({
     isFetching: PropTypes.bool.isRequired,
