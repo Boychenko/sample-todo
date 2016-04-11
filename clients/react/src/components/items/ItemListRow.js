@@ -16,7 +16,7 @@ class ItemListRow extends React.Component {
         <td>{priorities[item.priority]}</td>
         <td>{item.dueDate && new Date(item.dueDate).toLocaleDateString()}</td>
         <td>
-          <a href className="btn btn-default btn-xs" onClick={this.handleDeleteItemClick}>
+          <a href="" className="btn btn-default btn-xs" onClick={this.handleDeleteItemClick}>
             <span className="glyphicon glyphicon-trash"/>
           </a>
         </td>

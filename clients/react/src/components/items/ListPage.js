@@ -18,15 +18,14 @@ class ListPage extends Component {
 
   deleteItem = (event, item) => {
     event.preventDefault();
-    this.props.actions.deleteItem(item);
+    const {pagingInfo: {page}} = this.props.items;
+    this.props.actions.deleteItem(item, {page: page + 1});
   };
 
   render() {
-    const {pagingInfo: {page, pageCount}, isFetching} = this.props.items;
+    const {pagingInfo: {page, pageCount}} = this.props.items;
     let containerClassName = 'pagination';
-    if (isFetching) {
-      containerClassName += ' disabled';
-    }
+
     return (
       <div>
         <Helmet title="Todo Items"/>
