@@ -1,3 +1,4 @@
+import {browserHistory} from 'react-router';
 import * as types from '../constants/ActionTypes';
 
 export function loadItems(params) {
@@ -9,8 +10,9 @@ export function loadItems(params) {
 
 export function saveItem(item) {
   return {
-    types  : [types.SAVE_ITEM_REQUEST, types.SAVE_ITEM_SUCCESS, types.SAVE_ITEM_FAILURE],
-    promise: (client) => client.post('/items', {data: item})
+    types   : [types.SAVE_ITEM_REQUEST, types.SAVE_ITEM_SUCCESS, types.SAVE_ITEM_FAILURE],
+    creators: [null, () => browserHistory.push('/items')],
+    promise : (client) => client.post('/items', {data: item})
   };
 }
 
