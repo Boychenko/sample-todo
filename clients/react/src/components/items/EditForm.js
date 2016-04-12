@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 import {reduxForm} from 'redux-form';
-//import {DateTimePicker} from 'react-widgets';
 import DateTimeField from 'react-bootstrap-datetimepicker';
 
 class EditForm extends Component {

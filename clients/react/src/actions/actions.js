@@ -19,7 +19,7 @@ export function saveItem(item) {
 export function deleteItem(item, loadParams) {
   return {
     types   : [types.DELETE_ITEM_REQUEST, types.DELETE_ITEM_SUCCESS, types.DELETE_ITEM_FAILURE],
-    creators: [null, () => loadItems(loadParams)],
+    creators: [null, dispatch => dispatch(loadItems(loadParams))],
     promise : (client) => {
       return client.del(`/items/${item.id}`);
     }

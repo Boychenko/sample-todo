@@ -10,12 +10,9 @@ export default function (client) {
         return next(action);
       }
 
-      const dispatchFromCreator = creator => {
+      const callCreator = creator => {
         if (creator) {
-          const act = creator();
-          if (act) {
-            dispatch(act);
-          }
+          creator(dispatch);
         }
       };
 
@@ -23,21 +20,21 @@ export default function (client) {
       const [requestCreator, successCreator, failureCreator] = creators || [];
       next({...rest, type: REQUEST});
 
-      dispatchFromCreator(requestCreator);
+      callCreator(requestCreator);
 
       const actionPromise = promise(client);
       actionPromise.then(
         (response) => {
           next({...rest, response, type: SUCCESS});
-          dispatchFromCreator(successCreator);
+          callCreator(successCreator);
         },
         (error) => {
           next({...rest, error, type: FAILURE});
-          dispatchFromCreator(failureCreator);
+          callCreator(failureCreator);
         }
       ).catch((error) => {
         next({...rest, error, type: FAILURE});
-        dispatchFromCreator(failureCreator);
+        callCreator(failureCreator);
       });
 
       return actionPromise;
