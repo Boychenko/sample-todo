@@ -3,7 +3,7 @@ import EditForm from './EditForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
-import priorities from '../../constants/Priorities';
+import priorities from '../../constants/priorities';
 
 class EditPage extends Component {
   save = (data) => {
@@ -17,7 +17,6 @@ class EditPage extends Component {
     );
   }
 }
-
 
 EditPage.propTypes = {
   actions: PropTypes.shape({

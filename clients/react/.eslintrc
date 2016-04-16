@@ -27,6 +27,7 @@
     "react/jsx-space-before-closing": [2, "never"]
   },
   "globals": {
-    "__APIUrl__": true
+    "__APIUrl__": true,
+   "__AUTHORITY_URL__": true
   }
 }

@@ -6,7 +6,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import api from '../middleware/api';
-import ApiClient from '../helpers/ApiClient';
+import ApiClient from '../helpers/AuthApiClient';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {

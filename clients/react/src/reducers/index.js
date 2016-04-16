@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
-import * as types from '../constants/ActionTypes';
+import * as types from '../constants/actionTypes';
 import {reducer as formReducer} from 'redux-form';
 import paginate from './paginate';
 import {routerReducer} from 'react-router-redux';
+import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
   items  : paginate({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     ]
   }),
   form   : formReducer,
-  routing: routerReducer
+  routing: routerReducer,
+  auth   : authReducer
 });
 
 export default rootReducer;

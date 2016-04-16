@@ -14,7 +14,8 @@ const getPlugins = function(env) {
   const GLOBALS = {
     'process.env.NODE_ENV': JSON.stringify(env),
     __DEV__: env === developmentEnvironment,
-    __APIUrl__: JSON.stringify(env === developmentEnvironment ? 'http://localhost:53176/api' : '/api')
+    __APIUrl__: JSON.stringify(env === developmentEnvironment ? 'http://localhost:53176/api' : '/api'),
+    __AUTHORITY_URL__: JSON.stringify('https://localhost:44300/core')
   };
 
   const plugins = [
@@ -85,6 +86,11 @@ function getConfig(env) {
       path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
       publicPath: '/',
       filename: 'bundle.js'
+    },
+    resolve: {
+      alias : {
+        React: 'react'
+      }
     },
     plugins: getPlugins(env),
     module: {

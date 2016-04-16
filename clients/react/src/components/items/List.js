@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import ItemListRow from './ItemListRow';
 import ItemListHeader from './ItemListHeader';
-import priorities from '../../constants/Priorities';
+import priorities from '../../constants/priorities';
 
 const List = (props) => {
   return (

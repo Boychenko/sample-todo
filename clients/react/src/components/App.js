@@ -1,31 +1,11 @@
 import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
-import {LinkContainer, IndexLinkContainer} from 'react-router-bootstrap';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import Header from './common/Header';
 
-export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.element
-  };
-
+class App extends Component {
   render() {
     return (
       <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Todo sample</Link>
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav>
-            <IndexLinkContainer to="/">
-              <NavItem eventKey={1}>Home</NavItem>
-            </IndexLinkContainer>
-            <LinkContainer to="/Items">
-              <NavItem eventKey={2}>Items</NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar>
+        <Header/>
         <div className="container">
           {this.props.children}
         </div>
@@ -33,3 +13,9 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.element
+};
+
+export default App;

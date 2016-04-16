@@ -18,19 +18,22 @@ function formatUrl(path) {
 class _ApiClient {
   constructor() {
     methods.forEach((method) => //eslint-disable-line no-return-assign
-      this[method] = (path, {params, data} = {}) => new Promise((resolve, reject) => {
+      this[method] = (path, {params, data, headers} = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
+
+        if (headers) {
+          request.set(headers);
+        }
 
         if (params) {
           request.query(params);
         }
 
-
         if (data) {
           request.send(data);
         }
 
-        request.end((err, {body} = {}) => (err ? reject(body || err) : resolve(body)));
+        request.end((err, {body} = {}) => (err ? reject({err, body}) : resolve(body)));
       }));
   }
 }

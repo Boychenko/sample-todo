@@ -1,5 +1,8 @@
 import {browserHistory} from 'react-router';
-import * as types from '../constants/ActionTypes';
+import {logout as logoutOidc} from 'redux-oidc';
+import * as types from '../constants/actionTypes';
+import toastr from 'toastr';
+import {getRedirectPath, setRedirectPath} from '../helpers/oidcHelpers';
 
 export function loadItems(params) {
   return {
@@ -23,5 +26,39 @@ export function deleteItem(item, loadParams) {
     promise : (client) => {
       return client.del(`/items/${item.id}`);
     }
+  };
+}
+
+export function authenticationSuccess(profile) {
+  browserHistory.push(getRedirectPath() || '/');
+  setRedirectPath();
+  return {
+    type: types.AUTHENTICATION_SUCCESS,
+    profile
+  };
+}
+
+export function authenticationError(error) {
+  toastr.error('Failed', 'Authentication error');
+  return {
+    type: types.AUTHENTICATION_ERROR,
+    error
+  };
+}
+
+export function authorizationError({err, body}) {
+  toastr.error((body && body.message) || 'Authorization error');
+  return {
+    type: types.AUTHORIZATION_ERROR,
+    error: {err, body}
+  };
+}
+
+export function logout(error) {
+  logoutOidc();
+  browserHistory.push('/');
+  return {
+    type: types.AUTHORIZATION_ERROR,
+    error
   };
 }

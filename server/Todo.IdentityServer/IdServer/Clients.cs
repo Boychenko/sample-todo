@@ -22,7 +22,7 @@
                     AllowRememberConsent = false,
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:21575/index.html",
+                        "http://localhost:3000/callback",
                     },
                     AllowedScopes = new List<string>
                     {
@@ -32,7 +32,7 @@
                     },
 
                     AccessTokenType = AccessTokenType.Jwt,
-                    IdentityTokenLifetime = 360,
+                    IdentityTokenLifetime = 300,
                     AccessTokenLifetime = 360
                 }
             };
