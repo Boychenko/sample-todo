@@ -11,9 +11,13 @@ class EditPage extends Component {
     return this.props.actions.saveItem({...data, dueDate: new Date(Number(data.dueDate))});
   };
 
+  cancel = () => {
+    this.context.router.goBack();
+  };
+
   render() {
     return (
-      <EditForm save={this.save} priorities={priorities}/>
+      <EditForm save={this.save} cancel={this.cancel} priorities={priorities}/>
     );
   }
 }
@@ -22,6 +26,10 @@ EditPage.propTypes = {
   actions: PropTypes.shape({
     saveItem: PropTypes.func.isRequired
   })
+};
+
+EditPage.contextTypes = {
+  router: PropTypes.object
 };
 
 function mapDispatchToProps(dispatch) {

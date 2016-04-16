@@ -8,9 +8,10 @@ import createLogger from 'redux-logger';
 import api from '../middleware/api';
 import ApiClient from '../helpers/AuthApiClient';
 import rootReducer from '../reducers';
+import apiErrors from '../middleware/apiErrors';
 
 export default function configureStore(initialState) {
-  const middlewares = [thunk, api(new ApiClient()), createLogger()];
+  const middlewares = [thunk, api(new ApiClient()), apiErrors, createLogger()];
 
   const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares),
