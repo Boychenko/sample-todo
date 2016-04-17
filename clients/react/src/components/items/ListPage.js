@@ -3,9 +3,11 @@ import {Link} from 'react-router';
 import ItemsList from './List';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
+import {asyncConnect} from 'redux-async-connect';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
 import ReactPaginate from 'react-paginate';
+import {isLoaded as isReferencesLoaded} from '../../reducers/referencesReducer';
 
 class ListPage extends Component {
   componentDidMount() {
@@ -31,11 +33,11 @@ class ListPage extends Component {
         <Helmet title="Todo Items"/>
         <h2>Items</h2>
         <div className="btn-toolbar">
-          <Link className="btn btn-primary" data-tooltip="Create new Item" to="/items/create">
+          <Link className="btn btn-primary" to="/items/create">
             <span className="glyphicon glyphicon-plus"/> Create Item
           </Link>
         </div>
-        <ItemsList items={this.props.items.list} deleteItem={this.deleteItem}/>
+        <ItemsList items={this.props.items.list} priorities={this.props.priorities} deleteItem={this.deleteItem}/>
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
@@ -54,11 +56,12 @@ class ListPage extends Component {
 }
 
 ListPage.propTypes = {
-  actions: PropTypes.shape({
+  actions   : PropTypes.shape({
     loadItems : PropTypes.func.isRequired,
     deleteItem: PropTypes.func.isRequired
   }),
-  items  : PropTypes.shape({
+  priorities: PropTypes.array.isRequired,
+  items     : PropTypes.shape({
     isFetching: PropTypes.bool.isRequired,
     list      : PropTypes.array.isRequired,
     pagingInfo: PropTypes.object.isRequired
@@ -67,7 +70,8 @@ ListPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    items: state.items.paging
+    items     : state.items.paging,
+    priorities: state.references.priorities
   };
 }
 
@@ -77,7 +81,17 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
+const connectedPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ListPage);
+
+export default asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isReferencesLoaded(getState())) {
+      return dispatch(actions.loadReferences());
+    }
+    return undefined;
+  }
+
+}])(connectedPage);

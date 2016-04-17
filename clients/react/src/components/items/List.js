@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import ItemListRow from './ItemListRow';
 import ItemListHeader from './ItemListHeader';
-import priorities from '../../constants/priorities';
 
 const List = (props) => {
   return (
@@ -9,7 +8,7 @@ const List = (props) => {
       <ItemListHeader/>
       <tbody>
       {props.items.map(item =>
-        <ItemListRow key={item.id} item={item} priorities={priorities} deleteItem={props.deleteItem}/>
+        <ItemListRow key={item.id} item={item} priorities={props.priorities} deleteItem={props.deleteItem}/>
       )}
       </tbody>
     </table>
@@ -18,7 +17,8 @@ const List = (props) => {
 
 List.propTypes = {
   items     : PropTypes.array.isRequired,
-  deleteItem: PropTypes.func.isRequired
+  deleteItem: PropTypes.func.isRequired,
+  priorities: PropTypes.array.isRequired
 };
 
 export default List;

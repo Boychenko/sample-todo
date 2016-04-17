@@ -7,9 +7,11 @@
     using Domain.Models;
     using Models.Dtos;
 
+    [RoutePrefix("api/references")]
     public class ReferencesController : BaseController
     {
         [HttpGet]
+        [Route("")]
         public IHttpActionResult Get()
         {
             var result = new ReferencesResponse();

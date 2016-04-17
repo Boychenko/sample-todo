@@ -3,8 +3,8 @@ import EditForm from './EditForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
-import priorities from '../../constants/priorities';
 import {asyncConnect} from 'redux-async-connect';
+import {isLoaded as isReferencesLoaded} from '../../reducers/referencesReducer';
 import moment from 'moment';
 
 class EditPage extends Component {
@@ -20,16 +20,22 @@ class EditPage extends Component {
 
   render() {
     return (
-      <EditForm save={this.save} cancel={this.cancel} priorities={priorities} initialValues={this.props.item}/>
+      <EditForm
+        save={this.save}
+        cancel={this.cancel}
+        priorities={this.props.priorities}
+        initialValues={this.props.item}
+      />
     );
   }
 }
 
 EditPage.propTypes = {
-  actions: PropTypes.shape({
+  actions   : PropTypes.shape({
     saveItem: PropTypes.func.isRequired
   }),
-  item   : PropTypes.object.isRequired
+  item      : PropTypes.object.isRequired,
+  priorities: PropTypes.array.isRequired
 };
 
 EditPage.contextTypes = {
@@ -42,7 +48,8 @@ function mapStateToProps(state) {
     item.dueDate = moment(state.items.editItem.dueDate).valueOf();
   }
   return {
-    item
+    item,
+    priorities: state.references.priorities
   };
 }
 
@@ -58,9 +65,15 @@ const connectedPage = connect(
 )(EditPage);
 
 export default asyncConnect([{
-  deferred: true,
-  promise : ({store: {dispatch/*, getState*/}, params}) => {
-    dispatch(actions.editItem(params.id));
+  promise : ({store: {dispatch, getState}, params}) => {
+    const promises = [];
+    promises.push(Promise.resolve(dispatch(actions.editItem(params.id))));
+
+    if (!isReferencesLoaded(getState())) {
+      promises.push(dispatch(actions.loadReferences()));
+    }
+
+    return Promise.all(promises);
   }
 
 }])(connectedPage);

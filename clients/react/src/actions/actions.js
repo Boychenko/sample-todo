@@ -11,6 +11,13 @@ export function loadItems(params) {
   };
 }
 
+export function loadReferences() {
+  return {
+    types  : [types.REFERENCES_REQUEST, types.REFERENCES_SUCCESS, types.REFERENCES_FAILURE],
+    promise: (client) => client.get('/references')
+  };
+}
+
 export function editItem(id) {
   if (id) {
     return {

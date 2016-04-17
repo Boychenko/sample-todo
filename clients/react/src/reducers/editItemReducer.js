@@ -6,7 +6,7 @@ export default function editItemReducer(state = null, action) {
     case types.ITEM_FAILURE:
       return null;
     case types.ITEM_EDIT:
-      return action.data || action.response;//{...action.response, dueDate: new Date(action.response.dueDate)};
+      return action.data || action.response;
     default:
       return state;
   }
