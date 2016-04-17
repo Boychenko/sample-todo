@@ -28,8 +28,11 @@ class EditForm extends Component {
             <div className="form-group">
               <label className="control-label">Due Date</label>
               <DateTimeField
-                className="form-control" {...dueDate}
-                value={moment(dueDate.value).toDate() || new Date()}
+                className="form-control"
+                {...dueDate}
+                defaultText={moment(dueDate.value).format('x')}
+                dateTime={moment(dueDate.value).format('x')}
+                value={moment(dueDate.value).toDate()}
                 mode={'date'}
                 inputProps={{disabled: 'disabled'}}
               />
@@ -59,9 +62,9 @@ class EditForm extends Component {
             >
               Save
             </button>
-            <button disabled={submitting} style={{margin: '0 0 0 2px'}} className="btn btn-default" onClick={cancel}>
+            <a disabled={submitting} style={{margin: '0 0 0 2px'}} className="btn btn-default" onClick={cancel}>
               Cancel
-            </button>
+            </a>
           </div>
         </div>
       </form>
@@ -84,11 +87,6 @@ EditForm = reduxForm({
   form         : 'itemForm',
   fields       : ['title', 'dueDate', 'priority', 'completed', 'description'],
   validate     : itemValidation,
-  initialValues: {
-    dueDate  : new Date(),
-    completed: false,
-    priority : 0
-  },
   touchOnChange: true
 })(EditForm);
 

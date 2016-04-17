@@ -14,6 +14,7 @@ export default (
     <IndexRoute component={AboutPage}/>
     <Route path="items" component={ItemsListPage} onEnter={requireAuth}/>
     <Route path="items/create" component={ItemEdit}/>
+    <Route path="items/edit/:id" component={ItemEdit}/>
     <Route path="callback" component={CallbackPage}/>
     <Route path="*" component={NotFoundPage}/>
   </Route>

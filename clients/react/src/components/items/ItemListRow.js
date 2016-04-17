@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 
 class ItemListRow extends React.Component {
   handleDeleteItemClick = (event) => {
@@ -16,6 +17,9 @@ class ItemListRow extends React.Component {
         <td>{priorities[item.priority]}</td>
         <td>{item.dueDate && new Date(item.dueDate).toLocaleDateString()}</td>
         <td>
+          <Link to={`/items/edit/${item.id}`} className="btn btn-default btn-xs">
+            <span className="glyphicon glyphicon-pencil"/>
+          </Link>
           <a href="" className="btn btn-default btn-xs" onClick={this.handleDeleteItemClick}>
             <span className="glyphicon glyphicon-trash"/>
           </a>
