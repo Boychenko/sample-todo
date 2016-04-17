@@ -4,6 +4,7 @@ const ItemListHeader = () => {
   return (
     <thead>
       <tr>
+        <th>Completed</th>
         <th>ID</th>
         <th>Title</th>
         <th>Description</th>

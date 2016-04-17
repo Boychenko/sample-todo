@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
 import ItemsList from './List';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
@@ -8,6 +7,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
 import ReactPaginate from 'react-paginate';
 import {isLoaded as isReferencesLoaded} from '../../reducers/referencesReducer';
+import CreateButton from '../common/CreateButton';
 
 class ListPage extends Component {
   componentDidMount() {
@@ -32,11 +32,7 @@ class ListPage extends Component {
       <div>
         <Helmet title="Todo Items"/>
         <h2>Items</h2>
-        <div className="btn-toolbar">
-          <Link className="btn btn-primary" to="/items/create">
-            <span className="glyphicon glyphicon-plus"/> Create Item
-          </Link>
-        </div>
+        <CreateButton text="Create Item" link="/items/create"/>
         <ItemsList items={this.props.items.list} priorities={this.props.priorities} deleteItem={this.deleteItem}/>
         <ReactPaginate
           previousLabel={"previous"}

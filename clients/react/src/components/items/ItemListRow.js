@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import ColoredFlag from '../common/ColoredFlag';
 
 class ItemListRow extends React.Component {
   handleDeleteItemClick = (event) => {
@@ -11,6 +12,7 @@ class ItemListRow extends React.Component {
 
     return (
       <tr>
+        <td><ColoredFlag value={item.completed}/></td>
         <td>{item.id}</td>
         <td>{item.title}</td>
         <td>{item.description}</td>
