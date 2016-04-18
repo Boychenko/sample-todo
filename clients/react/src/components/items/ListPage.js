@@ -24,6 +24,11 @@ class ListPage extends Component {
     this.props.actions.deleteItem(item, {page: page + 1});
   };
 
+  markItemCompleted = (event, item) => {
+    event.preventDefault();
+    this.props.actions.markItemCompleted(item);
+  };
+
   render() {
     const {pagingInfo: {page, pageCount}} = this.props.items;
     let containerClassName = 'pagination';
@@ -33,7 +38,12 @@ class ListPage extends Component {
         <Helmet title="Todo Items"/>
         <h2>Items</h2>
         <CreateButton text="Create Item" link="/items/create"/>
-        <ItemsList items={this.props.items.list} priorities={this.props.priorities} deleteItem={this.deleteItem}/>
+        <ItemsList
+          items={this.props.items.list}
+          priorities={this.props.priorities}
+          deleteItem={this.deleteItem}
+          markItemCompleted={this.markItemCompleted}
+        />
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
@@ -53,10 +63,11 @@ class ListPage extends Component {
 
 ListPage.propTypes = {
   actions   : PropTypes.shape({
-    loadItems : PropTypes.func.isRequired,
-    deleteItem: PropTypes.func.isRequired
+    loadItems        : PropTypes.func.isRequired,
+    deleteItem       : PropTypes.func.isRequired,
+    markItemCompleted: PropTypes.func.isRequired
   }),
-  priorities: PropTypes.array.isRequired,
+  priorities: PropTypes.object.isRequired,
   items     : PropTypes.shape({
     isFetching: PropTypes.bool.isRequired,
     list      : PropTypes.array.isRequired,

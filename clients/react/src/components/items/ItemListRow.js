@@ -7,8 +7,19 @@ class ItemListRow extends React.Component {
     this.props.deleteItem(event, this.props.item);
   };
 
+  handleMarkItemCompletedClick = (event) => {
+    this.props.markItemCompleted(event, this.props.item);
+  };
+
   render() {
     const {item, priorities} = this.props;
+    let completeButton;
+    if (!item.completed) {
+      completeButton = (
+        <a href="" className="btn btn-default btn-xs" onClick={this.handleMarkItemCompletedClick}>
+          <span className="glyphicon glyphicon-ok"/>
+        </a>);
+    }
 
     return (
       <tr>
@@ -25,6 +36,7 @@ class ItemListRow extends React.Component {
           <a href="" className="btn btn-default btn-xs" onClick={this.handleDeleteItemClick}>
             <span className="glyphicon glyphicon-trash"/>
           </a>
+          {completeButton}
         </td>
       </tr>
     );
@@ -32,9 +44,10 @@ class ItemListRow extends React.Component {
 }
 
 ItemListRow.propTypes = {
-  item      : PropTypes.object.isRequired,
-  priorities: PropTypes.object.isRequired,
-  deleteItem: PropTypes.func.isRequired
+  item             : PropTypes.object.isRequired,
+  priorities       : PropTypes.object.isRequired,
+  deleteItem       : PropTypes.func.isRequired,
+  markItemCompleted: PropTypes.func.isRequired
 };
 
 export default ItemListRow;

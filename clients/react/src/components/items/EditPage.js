@@ -35,7 +35,7 @@ EditPage.propTypes = {
     saveItem: PropTypes.func.isRequired
   }),
   item      : PropTypes.object.isRequired,
-  priorities: PropTypes.array.isRequired
+  priorities: PropTypes.object.isRequired
 };
 
 EditPage.contextTypes = {

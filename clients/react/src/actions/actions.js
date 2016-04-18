@@ -56,6 +56,14 @@ export function deleteItem(item, loadParams) {
   };
 }
 
+export function markItemCompleted(item) {
+  return {
+    types   : [types.SAVE_ITEM_REQUEST, types.SAVE_ITEM_SUCCESS, types.SAVE_ITEM_FAILURE],
+    creators: [null, dispatch => dispatch({type: types.MARK_ITEM_COMPLETED, data: item.id})],
+    promise : (client) => client.put('/items', {data: {...item, completed: true}})
+  };
+}
+
 export function authenticationSuccess(profile) {
   browserHistory.push(getRedirectPath() || '/');
   setRedirectPath();
