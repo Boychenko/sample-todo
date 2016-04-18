@@ -16,7 +16,7 @@
                     Enabled = true,
                     ClientId = "todoSample",
                     Flow = Flows.Implicit,
-                    ClientUri = "https://github.com/Boychenko/",
+                    ClientUri = "https://github.com/Boychenko/sample-todo-2016",
                     LogoUri = "https://s.gravatar.com/avatar/e371b4f2e325e686190e1234333bb083?s=80",
                     RequireConsent = true,
                     AllowRememberConsent = false,
@@ -33,7 +33,7 @@
 
                     AccessTokenType = AccessTokenType.Jwt,
                     IdentityTokenLifetime = 300,
-                    AccessTokenLifetime = 360
+                    AccessTokenLifetime = 3600
                 }
             };
         }
