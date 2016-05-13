@@ -1,0 +1,8 @@
+/node_modules
+/bower_components
+/build
+/report
+/typings
+/tmp
+.DS_Store
+assets/styles/*.css
