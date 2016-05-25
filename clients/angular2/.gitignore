@@ -1,8 +1,8 @@
 /node_modules
-/bower_components
 /build
 /report
-/typings
+/typings/*
 /tmp
 .DS_Store
 assets/styles/*.css
+!typings/typings.d.ts

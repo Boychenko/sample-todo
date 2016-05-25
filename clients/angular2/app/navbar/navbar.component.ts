@@ -1,11 +1,10 @@
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
-    selector: 'as-navbar',
-    templateUrl: 'app/navbar/navbar.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'todo-navbar',
+    templateUrl: 'app/navbar/navbar.component.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class NavbarComponent {

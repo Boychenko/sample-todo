@@ -5,16 +5,17 @@ import {
     inject,
     async,
     describe,
+    MockApplicationRef
 } from '@angular/core/testing';
 import { TestComponentBuilder } from '@angular/compiler/testing';
-import { ROUTER_FAKE_PROVIDERS } from '@angular/router/testing';
-import { Component } from '@angular/core';
+import { ROUTER_PRIMARY_COMPONENT, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import {APP_BASE_HREF} from '@angular/common';
+import { Component, provide, ApplicationRef } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoggerService } from './blocks/logger.service';
 
 @Component({
-    selector: 'as-test',
-    template: '<div><as-main-app></as-main-app></div>',
+    template: '<div><todo-app></todo-app></div>',
     directives: [AppComponent]
 })
 class TestComponent {
@@ -23,17 +24,20 @@ class TestComponent {
 describe('AppComponent', () => {
     beforeEachProviders(() => [
         LoggerService,
-        ROUTER_FAKE_PROVIDERS
+        ROUTER_PROVIDERS,
+        provide(ROUTER_PRIMARY_COMPONENT, { useValue: AppComponent }),
+        provide(ApplicationRef, { useClass: MockApplicationRef }),
+        provide(APP_BASE_HREF, { useValue: '/' }),
     ]);
 
-    it('should have brand Angular 2 Starter', async(inject([TestComponentBuilder],
+    it('should have brand Todo sample', async(inject([TestComponentBuilder],
         (tsb: TestComponentBuilder) => {
             tsb.createAsync(TestComponent).then((fixture) => {
                 fixture.detectChanges();
                 let compiled = fixture.debugElement.nativeElement;
                 expect(compiled).toBeDefined();
                 expect(compiled.querySelector('a.navbar-brand'))
-                    .toHaveText('Angular 2 Starter');
+                    .toHaveText('Todo sample');
             });
         })));
 });

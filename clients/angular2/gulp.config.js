@@ -42,7 +42,21 @@ module.exports = function () {
             port: 3000,
             server: {
                 baseDir: './',
-                middleware: [historyApiFallback()]
+                middleware: [
+                  historyApiFallback(),
+                  {
+                    route: "/tmp",
+                    handle: function (req, res, next) {
+                      var url = req.originalUrl;
+                      if (/^\/tmp\/\S*\.html$/i.test(url)) {
+                        res.setHeader('Location', url.substring(4));
+                        res.writeHead(302);
+                        res.end();
+                      }
+                      next();
+                    }
+                  }
+                ]
             },
             files: [
                 "index.html",
@@ -50,9 +64,15 @@ module.exports = function () {
                 "assets/styles/main.css",
                 "tmp/app/**/*.js",
                 "app/**/*.css",
-                "app/**/*.html"
+                "app/**/*.html",
+                {
+                  match: ["/tmp/app/**/*.html"],
+                  fn: function (event, file) {
+                    console.log(event, file);
+                  }
+                }
             ]
-        },
+      },
         prod: {
             port: 3001,
             server: {

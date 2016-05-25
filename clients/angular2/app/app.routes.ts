@@ -1,9 +1,11 @@
-import {HomeComponent} from './home/home.component';
-import {TodolistComponent} from './todolist/todolist.component';
-import {SimplebindComponent} from './simplebind/simplebind.component';
+import {RouteDefinition} from '@angular/router-deprecated';
 
-export var APP_ROUTES: any[] = [
-    { path: '/', name: 'Home', component: HomeComponent },
-    { path: '/simplebind', name: 'Simplebind', component: SimplebindComponent },
-    { path: '/todolist', name: 'Todolist', component: TodolistComponent }
+import {AboutComponent} from './about/about.component';
+import {ItemsComponent} from './items/items.component';
+import {CallbackComponent} from './callback.component';
+
+export var APP_ROUTES: RouteDefinition[] = [
+    { path: '/', name: 'About', component: AboutComponent, useAsDefault: true },
+    { path: '/items', name: 'Items', component: ItemsComponent },
+    { path: '/callback', name: 'AuthCallback', component: CallbackComponent }
 ];

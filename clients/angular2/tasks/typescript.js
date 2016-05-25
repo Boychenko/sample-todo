@@ -6,7 +6,8 @@ var sourcemaps = require('gulp-sourcemaps');
 
 /* Initialize TS Project */
 var typingFiles = [
-    'typings/index.d.ts'
+    'typings/index.d.ts',
+    'typings/typings.d.ts'
 ];
 var tsUnitFiles = [].concat(config.tsTestFiles.unit, config.tsTestFiles.helper);
 var tsE2EFiles = [].concat(config.tsTestFiles.e2e, config.tsTestFiles.helper);
@@ -58,7 +59,8 @@ function lintTs(files) {
     return gulp.src(files)
         .pipe(tslint())
         .pipe(tslint.report('prose', {
-          summarizeFailureOutput: true
+          summarizeFailureOutput: true,
+          emitError: false
         }));
 }
 
@@ -78,11 +80,13 @@ function compileTs(files, watchMode) {
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
         .on('error', function () {
-            process.exit(1);
+            if (!watchMode) {
+                process.exit(1);
+            }
         });
     return res.js
         .pipe(sourcemaps.write('.', {
-              includeContent: false
-            }))
+              includeContent: true
+        }))
         .pipe(gulp.dest(config.tmp));
 }

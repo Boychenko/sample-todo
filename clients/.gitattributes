@@ -1,2 +1,5 @@
 * text=auto
+*.eot binary
+*.woff binary
+*.ttf binary
 * eol=lf

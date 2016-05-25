@@ -1,0 +1,24 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Completed</th>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Priority</th>
+      <th>Due Date</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of Items | async">
+      <td>{{item.completed}}</td>
+      <td>{{item.id}}</td>
+      <td>{{item.title}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.priority}}</td>
+      <td>{{item.dueDate | date}}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

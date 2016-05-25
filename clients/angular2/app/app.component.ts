@@ -1,21 +1,22 @@
 import {Component} from '@angular/core';
-import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+
 import {APP_ROUTES} from './app.routes';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoggerService} from './blocks/logger.service';
 
 @Component({
-    selector: 'as-main-app',
-    templateUrl: 'app/app.html',
-    directives: [NavbarComponent, ROUTER_DIRECTIVES]
+  selector: 'todo-app',
+  templateUrl: 'app/app.component.html',
+  directives: [NavbarComponent, ROUTER_DIRECTIVES]
 })
-@Routes(APP_ROUTES)
+@RouteConfig(APP_ROUTES)
 export class AppComponent {
-    public appRoutes: any[];
-    private logger: LoggerService;
+  public menuItems = [
+    { caption: 'About', link: 'About' },
+    { caption: 'Items', link: 'Items' }
+  ];
 
-    constructor(logger: LoggerService) {
-        this.logger = logger;
-        this.appRoutes = APP_ROUTES;
-    }
+  constructor(private logger: LoggerService) {
+  }
 }

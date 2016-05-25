@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- build:css assets/bundle.css -->
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css">
     <!-- app:css -->
     <link rel="stylesheet" href="/assets/styles/main.css">
     <!-- endinject -->
     <!-- endbuild -->
   </head>
   <body>
-    <as-main-app>
+    <todo-app>
       <i class="center-fix main-spinner fa fa-spin fa-spinner"></i>
-    </as-main-app>
+    </todo-app>
 
     <!-- build:js assets/lib.js -->
     <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
+    <script src="node_modules/oidc-token-manager/dist/oidc-token-manager.js"></script>
     <script src="node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
 
     <!-- 1. Load libraries -->
