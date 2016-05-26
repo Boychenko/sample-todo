@@ -16,17 +16,11 @@ import {AuthService} from '../common/auth.service';
         <pre>{{_profile | json}}</pre>
       </div>`
 })
-export class AboutComponent implements OnInit {
-  private _profile: any;
+export class AboutComponent {
 
   constructor(private _authService: AuthService) {
   }
-
   forceAuth() {
     this._authService.triggerAuth('/items');
-  }
-
-  ngOnInit() {
-    this._profile = this._authService.getProfile();
   }
 }

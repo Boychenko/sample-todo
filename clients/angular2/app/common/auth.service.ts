@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
+import {Observable} from 'rxjs/Observable';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 import {CONFIG} from '../common/config';
 
 @Injectable()
 export class AuthService {
+  profile: Observable<any>;
+
   private _locationPort = window.location.port ? `:${window.location.port}` : '';
+  private _profileSubject: ReplaySubject<any>;
   private _redirectPathKey = 'redirectPathKey';
   private _oidcMagagerConfig = {
     client_id: 'todoSample', // client id
@@ -16,6 +21,9 @@ export class AuthService {
   };
 
   constructor(private _router: Router) {
+    this._profileSubject = new ReplaySubject(1);
+    this.profile = this._profileSubject;
+    this._profileSubject.next(this.getProfile());
   }
 
   processTokenCallbackAsync(queryString?: string) {
@@ -39,15 +47,25 @@ export class AuthService {
     const manager = this.createTokenManager();
 
     manager.removeToken();
+    this._profileSubject.next(null);
     manager.redirectForToken();
-  }
-
-  getProfile() {
-    return this.createTokenManager().profile;
   }
 
   getToken() {
     return this.createTokenManager().access_token;
+  }
+
+  logout() {
+    this.createTokenManager().removeToken();
+    this._profileSubject.next(null);
+  }
+
+  private getProfile(): any {
+    const manager = this.createTokenManager();
+    if (manager.expired) {
+      return null;
+    }
+    return manager.profile;
   }
 
   private createTokenManager() {
@@ -67,6 +85,7 @@ export class AuthService {
   }
 
   private onTokenCallbackSuccess() {
+    this._profileSubject.next(this.getProfile());
     this._router.navigateByUrl(this.getRedirectPath());
   }
 
