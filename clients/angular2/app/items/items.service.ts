@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -16,8 +16,11 @@ export class ItemsService {
 
     constructor(private _http: Http) { }
 
-    getItems(): Observable<IListResponse<IItem>> {
-        return this._http.get(this._ItemsUrl)
+    getItems(page: number, pageSize: number): Observable<IListResponse<IItem>> {
+        let params = new URLSearchParams();
+        params.set('page', page.toString());
+        params.set('pageSize', pageSize.toString());
+        return this._http.get(this._ItemsUrl, {search: params})
             .map((response: Response) => {
               let result = <IListResponse<IItem>> response.json();
               result.list.forEach(i => i.dueDate = new Date(i.dueDate.toString()));
@@ -40,5 +43,4 @@ export class ItemsService {
         // console.log(error.statusText);
         return Observable.throw(error.json().error || 'Server error');
     }
-
 }

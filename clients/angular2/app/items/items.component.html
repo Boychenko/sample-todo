@@ -11,8 +11,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of Items | async">
-      <td>{{item.completed}}</td>
+    <tr *ngFor="let item of items">
+      <td><colored-flag [value]="item.completed"></colored-flag></td>
       <td>{{item.id}}</td>
       <td>{{item.title}}</td>
       <td>{{item.description}}</td>
@@ -22,3 +22,4 @@
     </tr>
   </tbody>
 </table>
+<pagination [totalItems]="total" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" [itemsPerPage]="pageSize" [maxSize]="5" class="pagination-sm" [boundaryLinks]="true"></pagination>

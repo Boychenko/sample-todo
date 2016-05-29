@@ -4,63 +4,73 @@
  *
  */
 
-(function(global) {
-    // ENV
-    global.ENV = 'development'
+(function (global) {
+  // ENV
+  global.ENV = 'development'
 
-    // wildcard paths
-    var paths = {
-        'n:*': 'node_modules/*'
-    };
+  // wildcard paths
+  var paths = {
+    'n:*': 'node_modules/*'
+  };
 
-    // map tells the System loader where to look for things
-    var map = {
-        'app': 'tmp/app',
-        'test': 'tmp/test',
-        'rxjs': 'n:rxjs',
-        '@angular': 'n:@angular',
-        'lodash': 'n:lodash'
-    };
+  // map tells the System loader where to look for things
+  var map = {
+    'app': 'tmp/app',
+    'test': 'tmp/test',
+    'rxjs': 'n:rxjs',
+    '@angular': 'n:@angular',
+    'lodash': 'n:lodash',
+    'ng2-bootstrap': 'n:ng2-bootstrap',
+    'moment': 'n:moment',
+  };
 
-    // packages tells the System loader how to load when no filename and/or no extension
-    var packages = {
-        'app': {
-            defaultExtension: 'js'
-        },
-        'test': {
-            defaultExtension: 'js'
-        },
-        'rxjs': {
-            defaultExtension: 'js'
-        }
-    };
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app': {
+      defaultExtension: 'js'
+    },
+    'test': {
+      defaultExtension: 'js'
+    },
+    'rxjs': {
+      defaultExtension: 'js'
+    },
+    'ng2-bootstrap': {
+      defaultExtension: 'js',
+      main: 'ng2-bootstrap.js'
+    },
+    'moment': {
+      defaultExtension: 'js',
+      main: 'moment.js'
+    }
+  };
 
-    var packageNames = [
-        '@angular/common',
-        '@angular/compiler',
-        '@angular/core',
-        '@angular/http',
-        '@angular/platform-browser',
-        '@angular/platform-browser-dynamic',
-        '@angular/router-deprecated',
-        '@angular/testing',
-        'lodash'
-    ];
+  var packageNames = [
+    '@angular/common',
+    '@angular/compiler',
+    '@angular/core',
+    '@angular/http',
+    '@angular/platform-browser',
+    '@angular/platform-browser-dynamic',
+    '@angular/router-deprecated',
+    '@angular/testing',
+    'lodash'
+  ];
 
-    // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
-    packageNames.forEach(function(pkgName) {
-        packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
-    });
+  // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+  packageNames.forEach(function (pkgName) {
+    packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+  });
 
-    var config = {
-        map: map,
-        packages: packages,
-        paths: paths
-    };
+  var config = {
+    map: map,
+    packages: packages,
+    paths: paths
+  };
 
-    // filterSystemConfig - index.html's chance to modify config before we register it.
-    if (global.filterSystemConfig) { global.filterSystemConfig(config); }
+  // filterSystemConfig - index.html's chance to modify config before we register it.
+  if (global.filterSystemConfig) { global.filterSystemConfig(config); }
 
-    System.config(config);
+  System.config(config);
 
 })(this);

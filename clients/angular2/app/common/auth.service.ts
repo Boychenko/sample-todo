@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {CONFIG} from '../common/config';
 
@@ -10,7 +10,7 @@ export class AuthService {
   profile: Observable<any>;
 
   private _locationPort = window.location.port ? `:${window.location.port}` : '';
-  private _profileSubject: ReplaySubject<any>;
+  private _profileSubject: BehaviorSubject <any>;
   private _redirectPathKey = 'redirectPathKey';
   private _oidcMagagerConfig = {
     client_id: 'todoSample', // client id
@@ -21,9 +21,8 @@ export class AuthService {
   };
 
   constructor(private _router: Router) {
-    this._profileSubject = new ReplaySubject(1);
+    this._profileSubject = new BehaviorSubject(this.getProfile());
     this.profile = this._profileSubject;
-    this._profileSubject.next(this.getProfile());
   }
 
   processTokenCallbackAsync(queryString?: string) {
