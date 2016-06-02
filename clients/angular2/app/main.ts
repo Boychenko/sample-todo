@@ -6,6 +6,7 @@ import {HTTP_PROVIDERS, Http, XHRBackend, RequestOptions} from '@angular/http';
 import {AppComponent} from './app.component';
 import {LoggerService} from './blocks/logger.service';
 import {AuthService} from './common/auth.service';
+import {ReferencesService} from './common/references.service';
 import {isProduction} from './common/config';
 import {appInjector} from './common/appInjector';
 import {HttpInterceptor} from './common/httpInterceptor';
@@ -16,6 +17,7 @@ if (isProduction()) {
 
 bootstrap(AppComponent, [
   LoggerService,
+  ReferencesService,
   AuthService,
   HTTP_PROVIDERS,
   ROUTER_PROVIDERS,

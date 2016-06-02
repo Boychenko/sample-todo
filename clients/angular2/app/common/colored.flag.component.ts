@@ -5,7 +5,7 @@ import {NgClass} from '@angular/common';
   moduleId: module.id,
   directives: [NgClass],
   template: `<span class="label" [ngClass]="{'label-success': value, 'label-danger': !value}">&nbsp;</span>`,
-  selector: 'colored-flag'
+  selector: 'todo-colored-flag'
 })
 
 export class ColoredFlagComponent {

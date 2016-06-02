@@ -6,6 +6,6 @@ import {CallbackComponent} from './callback.component';
 
 export var APP_ROUTES: RouteDefinition[] = [
     { path: '/', name: 'About', component: AboutComponent, useAsDefault: true },
-    { path: '/items', name: 'Items', component: ItemsComponent },
+    { path: '/items/...', name: 'Items', component: ItemsComponent },
     { path: '/callback', name: 'AuthCallback', component: CallbackComponent }
 ];
