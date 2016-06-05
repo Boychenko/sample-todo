@@ -19,7 +19,7 @@
     "gulp",
     "systemjs",
     "systemjs builder",
-    "karma",
+    "karma"
   ],
   "license": "MIT",
   "dependencies": {
