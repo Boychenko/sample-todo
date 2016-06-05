@@ -1,35 +1,27 @@
 {
-  "name": "angular2-starter",
+  "name": "angular2-sample",
   "version": "1.0.0-rc.1",
-  "author": "Antony Budianto",
-  "description": "Angular 2 Starter with Gulp, Karma, Jasmine, Protractor using SystemJS",
+  "author": "Alexander Boychenko",
+  "description": "Angular 2 sample",
   "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antonybudianto/angular2-starter.git"
+    "url": "https://github.com/Boychenko/sample-todo-2016.git"
   },
   "scripts": {
     "postinstall": "typings install",
     "start": "gulp",
-    "test": "gulp test",
-    "coveralls": "node ./node_modules/coveralls/bin/coveralls.js < ./report/remap/lcov.info"
+    "test": "gulp test"
   },
   "keywords": [
     "angular2",
     "starter",
-    "seed",
     "gulp",
     "systemjs",
     "systemjs builder",
-    "travis",
     "karma",
-    "jasmine",
-    "istanbul"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/antonybudianto/angular2-starter/issues"
-  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
     "@angular/compiler": "2.0.0-rc.1",

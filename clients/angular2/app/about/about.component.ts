@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 
-import {AuthService} from '../common/auth.service';
-
 @Component({
   moduleId: module.id,
   template: `<div>
@@ -12,15 +10,7 @@ import {AuthService} from '../common/auth.service';
         <p>
           It's more playground and starter kit
         </p>
-        <button (click)="forceAuth()">Auth test</button>
-        <pre>{{_profile | json}}</pre>
       </div>`
 })
 export class AboutComponent {
-
-  constructor(private _authService: AuthService) {
-  }
-  forceAuth() {
-    this._authService.triggerAuth('/items');
-  }
 }

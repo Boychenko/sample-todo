@@ -11,7 +11,8 @@ import {ItemEditComponent} from './item.edit.component';
 })
 @RouteConfig([
   { path: '/', name: 'ItemsList', component: ItemsListComponent, useAsDefault: true },
-  { path: '/:id', name: 'ItemEdit', component: ItemEditComponent }
+  { path: '/:id', name: 'ItemEdit', component: ItemEditComponent },
+  { path: '/create', name: 'ItemCreate', component: ItemEditComponent }
 ])
 export class ItemsComponent {
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
+import {Http, Response, URLSearchParams, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -37,6 +37,22 @@ export class ItemsService {
         return result;
       })
       .catch(this.handleError);
+  }
+
+  saveItem(item: IItem) {
+    let method;
+    if (item.id) {
+      method = this._http.put.bind(this._http);
+    } else {
+      method = this._http.post.bind(this._http)
+    }
+
+    return method(this._ItemsUrl, JSON.stringify(item))
+      .catch(this.handleError);
+  }
+
+  deleteItem(item: IItem) {
+    return this._http.delete(this._ItemsUrl + `/${item.id}`).catch(this.handleError);
   }
 
   private handleError(error: Response) {

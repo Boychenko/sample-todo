@@ -25,7 +25,10 @@ export class ReferencesService {
       this._http.get(this._referencesUrl)
       .map((response: Response) => <IReferences>response.json())
       .catch(this.handleError)
-      .subscribe((references: IReferences) => this._references.next(references));
+      .subscribe((references: IReferences) => {
+        this._references.next(references);
+        this._references.complete();
+      });
     }
     return this._references;
   }

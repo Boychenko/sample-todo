@@ -1,1 +1,33 @@
 <h2>Items #{{id}}</h2>
+<form *ngIf="item" (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm">
+  <div class="row">
+    <div class="col-sm-4">
+      <fieldset [disabled]="processing">
+        <div class="form-group" [ngClass]="{'has-error': !(title.valid || title.pristine)}">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" required [(ngModel)]="item.title" ngControl="title" #title="ngForm">
+          <span [ngClass]="{hidden: title.valid || title.pristine}" class="help-block">
+          Title is required
+        </span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': !(description.valid || description.pristine)}">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" [(ngModel)]="item.description" ngControl="description" #description="ngForm">
+        </div>
+        <div class="form-group">
+          <datepicker [(ngModel)]="item.dueDate" [showWeeks]="true"></datepicker>
+        </div>
+        <select class="form-control" [(ngModel)]="item.priority">
+          <option *ngFor="let priority of priorities; let i = index;" [value]="priority[0]">{{priority[1]}}</option>
+      </select>
+        <div class="checkbox">
+          <label>
+          <input [(ngModel)]="item.completed" type="checkbox"> Completed
+        </label>
+        </div>
+      </fieldset>
+      <button type="submit" [disabled]="!itemForm.form.valid || processing" class="btn btn-success">Save</button>
+      <button [disabled]="processing" class="btn btn-default" (click)="cancel($event)">Cancel</button>
+    </div>
+  </div>
+</form>

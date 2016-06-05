@@ -50,7 +50,7 @@
         public async Task<Item> Update(string userId, Item item)
         {
             item.UserId = userId;
-            item.DueDate = item.DueDate.Date;
+            item.DueDate = item.DueDate;
             _uow.ItemRepository.Update(item);
             await _uow.Commit();
             return item;

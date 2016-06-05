@@ -5,6 +5,7 @@ import {CanActivate, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {PAGINATION_DIRECTIVES, AlertComponent} from 'ng2-bootstrap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/publish';
+import * as _ from 'lodash';
 
 import {ColoredFlagComponent} from '../common/colored.flag.component';
 import {IItem} from './item';
@@ -29,7 +30,7 @@ export class ItemsListComponent implements OnInit {
   pageSize: number = 10;
   total: number;
   private _page: BehaviorSubject<number>;
-  private _responseSource: ReplaySubject<IListResponse<IItem>>
+  private _responseSource: ReplaySubject<IListResponse<IItem>>;
 
 
   constructor(private _itemservice: ItemsService, private _referencesService: ReferencesService) {
@@ -38,7 +39,8 @@ export class ItemsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._page.switchMap(page => this._itemservice.getItems(page, this.pageSize)).subscribe(response => this._responseSource.next(response));
+    this._page.switchMap(page => this._itemservice.getItems(page, this.pageSize))
+      .subscribe(response => this._responseSource.next(response));
     const connectable = this._responseSource.publish();
     connectable.subscribe(response => {
       this.items = response.list;
@@ -56,5 +58,17 @@ export class ItemsListComponent implements OnInit {
     if (page !== this.currentPage) {
       this._page.next(page);
     }
+  }
+
+  public complete(item: IItem, event: Event) {
+    event.preventDefault();
+    var clone = _.clone(item);
+    clone.completed = true;
+    this._itemservice.saveItem(clone).subscribe(() => item.completed = true);
+  }
+
+  public remove(item: IItem, event: Event) {
+    event.preventDefault();
+    this._itemservice.deleteItem(item).subscribe(() => this._page.next(this.currentPage));
   }
 }
