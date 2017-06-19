@@ -27,7 +27,7 @@ namespace Todo.Persistence
         {
             try
             {
-                await _context.SaveChangesAsync();       
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
