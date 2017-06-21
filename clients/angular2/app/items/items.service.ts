@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams, Headers} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -44,7 +44,7 @@ export class ItemsService {
     if (item.id) {
       method = this._http.put.bind(this._http);
     } else {
-      method = this._http.post.bind(this._http)
+      method = this._http.post.bind(this._http);
     }
 
     return method(this._ItemsUrl, JSON.stringify(item))
