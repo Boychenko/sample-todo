@@ -46,6 +46,11 @@
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
                 .UseNoServerHttpHeader()
@@ -55,6 +60,7 @@
                         .AllowAnyMethod()
                         .AllowAnyOrigin())
                 // Add MVC to the request pipeline.
+                .UseInternalServerErrorOnException()
                 .UseHttpException()
                 .UseMvc();
 
