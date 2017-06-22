@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{598DA5E7-FF5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CB6E77EB-2BAA-4282-BD0E-244E1DEC4A6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Services", "Todo.Services\Todo.Services.csproj", "{F127E109-44A3-4CDD-AFF5-AE09F9E91727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Services", "Todo.Services\Todo.Services.csproj", "{F127E109-44A3-4CDD-AFF5-AE09F9E91727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.IdentityServer", "Todo.IdentityServer\Todo.IdentityServer.csproj", "{024AD3ED-DC9A-4507-96E8-37D92BA2F5CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{F127E109-44A3-4CDD-AFF5-AE09F9E91727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F127E109-44A3-4CDD-AFF5-AE09F9E91727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F127E109-44A3-4CDD-AFF5-AE09F9E91727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024AD3ED-DC9A-4507-96E8-37D92BA2F5CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024AD3ED-DC9A-4507-96E8-37D92BA2F5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024AD3ED-DC9A-4507-96E8-37D92BA2F5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024AD3ED-DC9A-4507-96E8-37D92BA2F5CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
