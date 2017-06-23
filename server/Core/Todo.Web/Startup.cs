@@ -1,13 +1,16 @@
 ﻿namespace Todo.Web
 {
+    using System.IdentityModel.Tokens.Jwt;
     using AutoMapper;
     using Boilerplate.AspNetCore;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Microsoft.IdentityModel.Protocols.OpenIdConnect;
     using Newtonsoft.Json.Serialization;
     using Persistance;
 
@@ -44,12 +47,26 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, TodoDbContext context)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                // base-address of your identityserver
+                Authority = "https://localhost:44300",
+ 
+                Audience = "https://localhost:44300/resources",
+
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                
+            });
 
             app
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.

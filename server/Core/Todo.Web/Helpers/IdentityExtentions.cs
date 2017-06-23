@@ -7,7 +7,6 @@
     {
         public static string GetAppUserId(this IIdentity identity)
         {
-            return "0db91a12-1c06-4654-abb1-8b6dcb6c73b5";
             var claimsIdentity = identity as ClaimsIdentity;
 
             if (claimsIdentity == null)

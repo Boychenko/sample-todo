@@ -20,7 +20,6 @@
                     LogoUri = "https://s.gravatar.com/avatar/e371b4f2e325e686190e1234333bb083?s=80",
                     RequireConsent = true,
                     AllowRememberConsent = false,
-                    AllowOfflineAccess = true,
                     RedirectUris = new List<string>
                     {
                         "http://localhost:3000/callback",
@@ -34,7 +33,9 @@
 
                     AccessTokenType = AccessTokenType.Jwt,
                     IdentityTokenLifetime = 300,
-                    AccessTokenLifetime = 3600
+                    AccessTokenLifetime = 3600,
+                    AllowOfflineAccess = true,
+                    AllowAccessTokensViaBrowser = true
                 }
             };
         }

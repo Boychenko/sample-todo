@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    //[Authorize]
+    [Authorize]
     public class BaseController : Controller
     {
          

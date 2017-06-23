@@ -30,9 +30,9 @@ class EditForm extends Component {
               <DateTimeField
                 className="form-control"
                 {...dueDate}
-                defaultText={moment(dueDate.value).format('x')}
-                dateTime={moment(dueDate.value).format('x')}
-                value={moment(dueDate.value).toDate()}
+                defaultText={moment.utc(dueDate.value).format('x')}
+                dateTime={moment.utc(dueDate.value).format('x')}
+                value={moment.utc(dueDate.value).toDate()}
                 mode={'date'}
                 inputProps={{disabled: 'disabled'}}
               />

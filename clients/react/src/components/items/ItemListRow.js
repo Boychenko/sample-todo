@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import ColoredFlag from '../common/ColoredFlag';
+import moment from 'moment';
 
 class ItemListRow extends React.Component {
   handleDeleteItemClick = (event) => {
@@ -28,7 +29,7 @@ class ItemListRow extends React.Component {
         <td>{item.title}</td>
         <td>{item.description}</td>
         <td>{priorities[item.priority]}</td>
-        <td>{item.dueDate && new Date(item.dueDate).toLocaleDateString()}</td>
+        <td>{item.dueDate && moment.utc(item.dueDate).toDate().toLocaleDateString()}</td>
         <td>
           <Link to={`/items/edit/${item.id}`} className="btn btn-default btn-xs">
             <span className="glyphicon glyphicon-pencil"/>

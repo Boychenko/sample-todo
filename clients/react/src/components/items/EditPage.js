@@ -45,7 +45,7 @@ EditPage.contextTypes = {
 function mapStateToProps(state) {
   const item = state.items.editItem;
   if (item && item.dueDate) {
-    item.dueDate = moment(state.items.editItem.dueDate).valueOf();
+    item.dueDate = moment.utc(state.items.editItem.dueDate).valueOf();
   }
   return {
     item,
