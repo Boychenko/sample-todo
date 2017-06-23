@@ -62,7 +62,7 @@ export class ItemsListComponent implements OnInit {
 
   public complete(item: IItem, event: Event) {
     event.preventDefault();
-    var clone = _.clone(item);
+    let clone = _.clone(item);
     clone.completed = true;
     this._itemservice.saveItem(clone).subscribe(() => item.completed = true);
   }

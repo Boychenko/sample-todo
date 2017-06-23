@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams, Headers} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import * as moment from 'moment';
 
 import {IItem} from './item';
 import {IListResponse} from '../common/listResponse';
@@ -23,7 +24,7 @@ export class ItemsService {
     return this._http.get(this._ItemsUrl, { search: params })
       .map((response: Response) => {
         let result = <IListResponse<IItem>>response.json();
-        result.list.forEach(i => i.dueDate = new Date(i.dueDate.toString()));
+        result.list.forEach(i => i.dueDate = moment.utc(i.dueDate).toDate());
         return result;
       })
       .catch(this.handleError);
@@ -33,7 +34,7 @@ export class ItemsService {
     return this._http.get(this._ItemsUrl + `/${id}`)
       .map((response: Response) => {
         let result = <IItem>response.json();
-        result.dueDate = new Date(result.dueDate.toString());
+        result.dueDate = moment.utc(result.dueDate).toDate();
         return result;
       })
       .catch(this.handleError);
@@ -44,7 +45,7 @@ export class ItemsService {
     if (item.id) {
       method = this._http.put.bind(this._http);
     } else {
-      method = this._http.post.bind(this._http)
+      method = this._http.post.bind(this._http);
     }
 
     return method(this._ItemsUrl, JSON.stringify(item))
