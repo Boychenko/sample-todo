@@ -5,4 +5,4 @@
 
 ## Two backends
 * [Full framework](https://github.com/Boychenko/sample-todo/tree/master/server/FullFramework) + Identity server 3
-* [.NET core](https://github.com/Boychenko/sample-todo/tree/master/server/Core) + Identity server 3
+* [.NET core](https://github.com/Boychenko/sample-todo/tree/master/server/Core) + Identity server 4
